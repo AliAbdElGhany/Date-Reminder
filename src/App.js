@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { Button, Col, Row, Container } from "react-bootstrap";
+import { Appointments } from "./data";
+import AppointmentsCount from './components/AppointmentsCount';
+import AppointmentsList from './components/AppoimtmentsList';
+import Actions from './components/Actions';
+import React, { useState } from "react";
+import img1 from './Images/1.jpg'
 
 function App() {
+  
+  const [AppointmentsData, setAppointmentsData] = useState(Appointments)
+  const onDelete = () => {
+    setAppointmentsData([])
+  }
+  const onView = () => {
+    setAppointmentsData(Appointments)
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="font color-body">
+      <Container className="p-5">
+       
+        <AppointmentsCount Appointments={AppointmentsData} />
+
+        <AppointmentsList Appointments={AppointmentsData} />        
+
+        <Actions Delete={onDelete} View={onView}/>
+
+      </Container>
     </div>
   );
 }
